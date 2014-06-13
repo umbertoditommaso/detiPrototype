@@ -1,0 +1,5 @@
+<%= label_tag form_id, "Database" %>
+<% mission = "IXV" unless mission %>
+<% @db_versions = Database.where("active = 't' AND mission = ?
+",mission).order(:version) %>
+<%= select_tag form_id ,options_from_collection_for_select(@db_versions, "id", "version"), :class=>'select_active_db form-control', include_blank: true%>

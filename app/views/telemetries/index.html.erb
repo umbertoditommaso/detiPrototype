@@ -1,0 +1,24 @@
+<h1>Listing telemetries</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Version</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @telemetries.each do |telemetry| %>
+  <tr>
+    <td><%= telemetry.name %></td>
+    <td><%= link_to telemetry.database.version, database_path(telemetry.database) %></td>
+    <td><%= link_to 'Show', telemetry,:class=>"btn btn-info" %></td>
+    <td><%= link_to 'Packets', packets_telemetry_path(telemetry),:class=>"btn btn-info" %></td>
+    <td><%= link_to 'Parameters', parameters_telemetry_path(telemetry),:class=>"btn btn-info" %></td>
+    <td><%= link_to 'Destroy', telemetry, method: :delete, data: { confirm: 'Are you sure?' },:class=>"btn btn-danger" %></td>
+  </tr>
+<% end %>
+</table>
+
+

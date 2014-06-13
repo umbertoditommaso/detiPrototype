@@ -1,0 +1,29 @@
+<h3> Importa Files Good</h3>
+	<div>
+		<%= render partial:'databases/select', locals:{form_id:"db_for_import"}%>
+		<div class="container-fluid task">
+			<%= field_set_tag "Import partials telemetries" do %>
+			<input id="good_upload" type="file" name="files[]" data-url="databases/:id/telemetries/upload"  multiple />
+			<!-- The global progress bar -->
+		    <!-- The container for the uploaded files -->
+		    <div id="good_files" class="files"></div>
+			<br />	
+			<%end%>
+
+			<label for="imported">TODO</label>
+			<input list="imported" />
+			<datalist id="imported"></datalist>
+
+			<label for="processed">DONE</label>
+			<input list="processed" />
+			<datalist id="processed"></datalist>
+			<%= form_tag 'databases/:database_id/delete',id:"deleteUpload" do %>
+			<%= hidden_field_tag 'uploaded', false%>
+			<%= hidden_field_tag 'processed', false%>
+			<%= submit_tag 'Delete Uploaded files',id:"deleteUploadedButton",:class=>"btn btn-danger"%>
+			<%end%>
+		</div>
+		<div class="container-fluid task">
+			<%= render partial:'tasks/start',locals:{ :task => Task.build("checkObet") }%>
+		</div>
+	</div>

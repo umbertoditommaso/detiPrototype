@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://www.w3schools.com"
+xmlns="http://www.w3schools.com"
+elementFormDefault="qualified">
+</xs:schema>
+<function>
+	<name>Extract Packets</name>
+	<description>
+		Extract requested paramas from the selected Telemetry Binary files 
+	</description>
+    <setting>db</setting>
+    <setting>good</setting>
+  	<before>
+  		<eval>@task.settings["version"] = Database.find(@task.settings["db"]).version</eval>
+		<eval>@task.settings["name"]=Telemetry.find(@task.settings["good"]).name</eval>
+  	</before>
+  	<workingDir>/telemetries/IXV/$(version)/$(name)_$(version)/</worikingDir>
+	<in>
+		<inputs>
+			<dir></dir>
+			<files>../Firme.txt</files>
+			<files>../SCOSS_input.db</files>
+		</inputs>
+		<label>Function parameters</label>
+		<param>
+			<name>Virtual Channel</name>
+			<defaults>1</defaults>
+			<type>number<min>0</min><max>2</max></type>
+		</param>
+		<param>
+			<name>Spids</name>
+			<defaults>110000010</defaults>
+		</param>
+	</in>
+	<after>
+		<eval>Telemetry.find(task.settings["good"]).importAll(task.arguments.split.first)</eval>
+	</after>
+	<output>
+		<files>/VC/*.bin</files>
+		<files>/Packets/*.bin</files>
+		<files>/Parameters/*.csv</files>
+		<files>/Logs/C++_IXVPacketFinder.txt</files>
+	</output>
+	<executable>
+		<dir>proc/bin/</dir>
+		<name>C++_IXVPacketFinder.exe</name>
+	</executable>
+</function>

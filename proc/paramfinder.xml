@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<function>
+	<name>Extract Parameters</name>
+	<description>
+		Extract the requested parameters from the selected Telemetry Binary files 
+	</description>
+    <setting>db</setting>
+    <setting>good</setting>
+  	<before>
+  		<eval>@task.settings["version"] = Database.find(@task.settings["db"]).version</eval>
+		<eval>@task.settings["name"]=Telemetry.find(@task.settings["good"]).name</eval>
+  	</before>
+  	<workingDir>/telemetries/IXV/$(version)/$(name)_$(version)/</worikingDir>
+	<in>
+		<inputs>
+			<dir></dir>
+			<files>../Firme.txt</files>
+			<files>../SCOSS_input.db</files>
+		</inputs>
+		<label>Function parameters</label>
+		<param>
+			<name>Virtual Channel</name>
+			<defaults>1</defaults>
+			<type>number<min>0</min><max>2</max></type>
+		</param>
+		<param>
+			<name>Mode(TEST/FLIGHT)</name>
+			<defaults>1</defaults>
+		</param>
+		<param>
+			<name>Parameters</name>
+			<defaults>PDTA1016 SMTA1011 ACTA1011</defaults>
+		</param>
+	</in>
+	<after>
+		<eval>Telemetry.find(task.settings["good"]).importAll(task.arguments.split.first)</eval>
+	</after>
+	<output>
+		<files>/VC/*.bin</files>
+		<files>/Packets/*.bin</files>
+		<files>/Parameters/*.csv</files>
+		<files>/Logs/C++_IXVPacketFinder.txt</files>
+	</output>
+	<executable>
+		<dir>proc/bin/</dir>
+		<name>C++_IXVParamFinder.exe</name>
+	</executable>
+</function>

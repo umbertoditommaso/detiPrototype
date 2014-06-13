@@ -1,0 +1,38 @@
+//<%=@cmd%>
+$("#task_status").html("");
+var task_dialog= $("#task_dialog").dialog({height:200,
+	maxHeight: 800,
+	modal: true });
+$("span.ui-dialog-title").html("<%=@task.exec%> <%=@pid%>" );
+//alert("<%=@task.inputs%>")
+
+
+
+var progressbar = $("#task_progress").progressbar({
+      value: false
+    });
+
+function nl2br (str, is_xhtml) {   
+    var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';    
+    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1'+ breakTag +'$2');
+}
+
+var id_iterval = setInterval(function(){
+	//$.get('/tasks/<%=@task.id%>/status',function(data){
+	$.getJSON('/tasks/<%=@task.id%>/status',function(data){
+	//$("#task_status").html(data);
+	$("#task_status").html(nl2br(data.output,true));
+	//running = $("#running").val();
+	running = data.running;
+	//if (running === "false"){
+	if (!running){
+		clearInterval(id_iterval);
+		$.post('/tasks/<%=@task.id%>/finalize.js',function(data){
+			eval(data);
+		});
+		alert ("task completeted");
+		progressbar.progressbar( "destroy" );
+		//$( ".progress-label" ).text("");
+	} 
+});
+},5000);

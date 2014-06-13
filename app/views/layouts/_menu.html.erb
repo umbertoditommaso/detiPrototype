@@ -1,0 +1,18 @@
+<div id ="nav">
+<span><%= link_to "Home",root_path %></span>
+<span><%= link_to "Vital Layer",vital_layer_path %></span>
+<span><%= link_to "Experiments",experiment_path %></span
+<span><a id="rest_menu_tab">Application</a></span>
+<ul id="rest_menu" class="mouseover_menu">
+	<li><%= link_to "Databases",databases_path %>
+	<li><%= link_to "Telemetries",telemetries_path %>
+	<li><%= link_to "Users", users_path %>
+	<li><a href="#">Tasks</a>
+	<ul>
+		<li><%= link_to "Recents",tasks_path %>
+		<li><%= link_to "Not Finalized",not_finalized_tasks_path %></li>
+		<li><%= link_to "Scheduled",schedule_tasks_path %></li>
+	</ul></li>
+    
+</ul>
+</div>

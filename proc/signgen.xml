@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<function name="Sign Gen">
+	<name>Generate signatures</name>
+	<description>
+		Generate a packet signatures file for a new database
+	</description>
+	<before>
+		<eval>@task.settings["version"] = (Database.find(@task.settings["db"])).version</eval>
+	</before>
+	<setting>db</setting>
+  	<workingDir>/telemetries/IXV/$(version)/</worikingDir>
+	<in>
+		<inputs></inputs>
+		<label>Function parameters</label>
+		<param>
+			<name>Options</name>
+			<defaults>000 0 1 11 0 001 0000 00000000</defaults>
+		</param>
+	</in>
+	<after>
+		<eval>@db=Database.find(task.settings["db"]).activate</eval>
+		<render><js>home/refresh</js></render>
+	</after>
+	<output>
+		<files>SCOSS_input.db</files>
+		<files>Firme.txt</files>
+		<files>C++_IXVSignGen.txt</files>
+	</output>
+	<log>C++_IXVSignGen.txt</log>
+	<executable>
+		<dir>proc/bin/</dir>
+		<name>C++_IXVSignGen.exe</name></executable>
+</function>

@@ -1,0 +1,32 @@
+<div id="content"><p>
+  <b>Name:</b>
+  <%= @task.name_id %>
+  
+</p>
+<p>
+  <b>Exec:</b>
+  <%= @task.exec %> 
+</p>
+<p>
+  <b>Args:</b>
+  <%= @task.arguments %>
+</p>
+<p>
+  <b>Path:</b>
+  <%= @task.path %>
+</p>
+<p>
+  <b>Finalized:</b>
+  <%= @task.finalized %>
+</p>
+<p>
+  <b>Stdout:</b>
+  <%= @task.getStdout %>
+</p>
+
+<p>
+  <b>Running:</b>
+  <%= @running %>
+</p></div>
+<div id="stdout"><%= simple_format @output %></div>
+<input type="hidden" id="running" value="<%=@running%>" />

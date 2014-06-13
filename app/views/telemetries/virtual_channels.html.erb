@@ -1,0 +1,7 @@
+<div id="select_virtual_channel" class="accordion">
+	<% @channels.each do |vc|%>
+	<h4><%=vc.channel%></h4>
+	<div></div>
+	<% end %>
+</div>
+<%= render  :partial => 'tasks/start', :locals => { :task => @extract }  %>

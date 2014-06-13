@@ -1,0 +1,25 @@
+<%= field_set_tag "Filters" do %>
+	<%= render partial:'databases/select', locals:{form_id:"explore_db"}%>
+	<%= render partial:'telemetries/select', locals:{form_id:"telemetry"}%>
+	<label name="channel">VC</label>
+	<select id="channel" class="form-control"></select>
+	<label name="packets">Spid</label>
+	<select id="packets" class="form-control"></select>
+<%end%>
+<br />
+<%= field_set_tag "Results" do %>
+<label name="parameters">Parameters</label>
+<input list="parameters"/>
+<datalist id="parameters">
+</datalist>
+
+<label name="synthetic">Synthetic</label>
+<input list="synthetic"/>
+<datalist id="synthetic">
+</datalist>
+
+<label name="logs">Logs</label>
+<input list="logs"/>
+<datalist id="logs">
+</datalist>
+<%end%>

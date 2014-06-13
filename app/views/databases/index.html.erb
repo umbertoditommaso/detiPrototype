@@ -1,0 +1,25 @@
+<h1>Listing databases</h1>
+
+<table>
+  <tr>
+    <th>Version</th>
+    <th>Mission</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @databases.each do |database| %>
+  <tr>
+    <td><%= database.version %></td>
+    <td><%= database.mission %></td>
+    <td><%= link_to 'Show', database,:class=>"btn btn-info" %></td>
+    <td><%= link_to 'Telemetries', database_telemetries_path(database),:class=>"btn btn-info" %></td>
+    <td><%= link_to 'Destroy', database, method: :delete, data: { confirm: 'Are you sure?' } ,:class=>"btn btn-danger"%></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Database', new_database_path,:class=>"btn btn-primary" %>

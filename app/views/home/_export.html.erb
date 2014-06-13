@@ -1,0 +1,17 @@
+<h3></h3>
+<div id="export">
+	<%= render partial:'databases/select',locals:{form_id:"db_export"}%>
+	<%= render partial:'telemetries/select',locals:{form_id:"telemetry_export"}%>
+	<label>Targets</label>
+	<select id="target_export" class="form-control">
+		<option></option>
+		<option>Parameters</option>
+		<option>Synthetics</option>
+	</select>	
+	<!--<label name="file_export">File</label>
+	<input list="file_export"/>
+	<datalist id="file_export">
+	</datalist>-->
+	<div class="container-fluid task">
+	<%= render partial:'tasks/start',locals:{ :task => Task.build("import2") }%></div>
+<div>

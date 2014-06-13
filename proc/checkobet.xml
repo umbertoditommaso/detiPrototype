@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<function>
+	<name>Check Telemetries</name>
+	<description>
+		Create contigues telemetries from the imported .good files
+	</description>
+	<before>
+		<eval>@task.settings["version"] = (Database.find(@task.settings["db"])).version</eval>
+	</before>
+	<setting>db</setting>
+  	<workingDir>/telemetries/IXV/$(version)/</worikingDir>
+	<in>
+		<inputs>
+			<dir>input/</dir>
+			<dir></dir>
+		</inputs>
+		<label>Function parameters</label>
+	</in>
+	<after>
+		<eval>@telemetries = Database.find(task.settings["db"]).importTelemetries</eval>
+		<render><js>home/refresh</js></render>
+	</after>
+	<output>
+		<files>/*.good</files>
+		<files>/C++_IXVCheckObet.txt</files>
+	</output>
+	<log>C++_IXVCheckObet_$(id).txt</log>
+	<executable>
+		<dir>proc/bin/</dir>
+		<name>C++_IXVCheckObet.exe</name></executable>
+</function>

@@ -1,0 +1,7 @@
+<h3>Continuity Check</h3>
+	<div>
+		<%= render partial:'databases/select', locals:{form_id:"db_check"}%>
+		<br />
+		<%= render partial:'telemetries/select', locals:{form_id:"telemetry_check"}%>
+		<%= render  :partial => 'tasks/start', :locals => { :task => Task.build("checkSeqCount") }  %>
+	</div>

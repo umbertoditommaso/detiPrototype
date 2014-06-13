@@ -1,0 +1,35 @@
+<%= form_for(task ,:url => '/tasks/init',remote: true, :html => { :id => "new_task_#{task.name_id}" }) do |f| %>
+<% name_id =task.name_id %>
+  <%= field_set_tag task.label do %>
+  <%= task.description %><br />
+    <%= f.hidden_field :name_id,:id=>name_id%>
+    <%  task.inputs.each do |name,value|%>
+        <div class="argument"> 
+          <%= f.label name %>
+          <%= f.fields_for :inputs do |arg| %>
+          <!--<%= arg.text_field :"#{name}",:value=>value,size:(value.length*1.2) %>-->
+          <% a = value.split%>
+
+          <% width =  (a.max_by(&:length).length) +2  %>
+          <% height = value.length/(2*width)+1%>
+          <%= arg.text_area :"#{name}",:value=>value,rows:height,:class=>"form-control" %>
+        </div>
+          <%end%>
+        </br>
+    <%end%>
+    <% task.settings.each do |name,value|%>           
+          <%= f.fields_for :settings do |setting| %>
+          <%= setting.hidden_field :"#{name}",:value=>value %>
+          <%end%>
+    <%end%>
+    <div class="checkbox">
+      <label>
+        <%= check_box_tag "schedule"%>
+        Schedule
+      </label>
+    </div>
+    <div class="actions">
+      <%= f.submit "Start", :class=>"btn btn-success btn-lg" %>
+    </div>
+  <%end%>
+<% end %>

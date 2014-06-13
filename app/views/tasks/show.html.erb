@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @task.name_id %>
+  
+</p>
+<p>
+  <b>Exec:</b>
+  <%= @task.exec %> 
+</p>
+<p>
+  <b>Args:</b>
+  <%= @task.arguments %>
+</p>
+<p>
+  <b>Path:</b>
+  <%= @task.path %>
+</p>
+<p>
+  <b>Finalized:</b>
+  <%= @task.finalized %>
+</p>
+<p>
+  <b>Stdout:</b>
+  <%= @task.getStdout %>
+</p>
+
+
+<%= link_to 'Start', start_task_path(@task),method: :start,data: { confirm: 'Are you sure?' },:class=>"btn btn-warning"%>
+<%= link_to 'Force Finalize', @task, method: :finalize, data: { confirm: 'Are you sure?' },:class=>"btn btn-danger" %>
+
+<%= link_to 'Back', tasks_path ,:class=>"btn btn-default"%>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<function>
+	<name>Export to THEMA</name>
+	<description>
+		Export the parameters of selected telemetry to THEMA 
+	</description>
+    <setting>db</setting>
+    <setting>good</setting>
+  	<before>
+  		<eval>@telemetry = Telemetry.find(@task.settings["good"])</eval>
+  		<eval>@task.settings["version"] = @telemetry.database.version</eval>
+		<eval>@task.settings["name"]=@telemetry.name</eval>
+  	</before>
+  	<workingDir>/telemetries/IXV/$(version)/$(name)_$(version)/$(targets)</worikingDir>
+	<in>
+		<inputs>
+			
+		</inputs>
+		<label>Function parameters</label>
+		
+	</in>
+	<after>
+		
+	</after>
+	<output>
+		
+	</output>
+	<executable>
+		<dir>proc/bin/</dir>
+		<name>import2.exe</name>
+	</executable>
+</function>

@@ -1,0 +1,18 @@
+<% if signed_in? %>
+	<div id="tabs">
+		<ul class="css-tabs">
+			<li><a href="#vital_layer"> Vital Layer </a></li>
+			<li><a href="#experiment"> Experiment </a></li>
+			<li><a href="#export"> Export </a></li>
+			<li><%= link_to "Sign out", signout_path, method: "delete" %></li>
+		</ul>
+		<%= render 'vital_layer' %>
+		<div id="experiment"><%= render 'experiment' %></div>
+		<%= render 'export'%>
+	</div>
+	<%= render 'tasks/status_placeholder'%>
+<% else %>
+	<h1>Welcome!</h1><br>
+	<p align="center">You need to <%= link_to "Sign In" , "/signin" ,:class=>"btn btn-primary"%> before continuing...</p>
+<% end %>
+

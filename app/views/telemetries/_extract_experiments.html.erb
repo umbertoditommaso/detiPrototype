@@ -1,0 +1,19 @@
+<h3> Extract Experiments</h3>
+	<div>
+		<%= render partial:'databases/select', locals:{form_id:"db_exp",mission:"IXV-Experiments"}%>
+
+		<div class="container-fluid task">
+			<%= field_set_tag "Import partials telemetries" do %>
+			<input id="experiment_upload" type="file" name="files[]" data-url="databases/:id/telemetries/import"  multiple />
+			<!-- The global progress bar -->
+		    <!-- The container for the uploaded files -->
+		    <div id="experiment_files" class="files"></div>
+			
+			<%end%>
+		</div>	
+		
+		<div class="container-fluid task">
+			<%= render partial:'telemetries/select', locals:{form_id:"select_telemetry_exp"}%>
+			<%= render partial:'tasks/start',locals:{ :task => Task.build("packetfinder-exp") }%>
+		</div>
+	</div>

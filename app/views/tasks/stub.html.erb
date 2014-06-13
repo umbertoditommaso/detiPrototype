@@ -1,0 +1,9 @@
+
+<% db = Database.new(:mission=>"IXV",:version=>"5.0")%>
+<%= Database.where("mission = ? and version = ?",db.mission,db.version).first%>
+
+<%= files=Dir.entries "."%><br /><br /><br />
+<%= files.delete_if{|f| !f.include?".good"}%><br /><br /><br />
+<%= files.each do |f| f[".good"]=""end%><br /><br /><br />
+<%= files %><br /><br /><br />
+<%Dir.chdir Rails.root%>

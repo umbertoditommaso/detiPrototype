@@ -1,0 +1,31 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+body{
+	max-width:1300px;
+	margin-left:1em;
+}
+
+#header{
+	height:70%;
+}
+#footer{
+	float:right;
+}
+
+.btn{
+	margin-left:1px;
+}
+#nav{
+	background-color:grey;
+}
+#tabs{
+	
+}
+.ui-menu {
+	width: 200px;
+	position:absolute;
+	z-index:1
+}
+

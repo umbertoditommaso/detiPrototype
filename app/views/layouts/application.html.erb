@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DetiPrototype</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div id="header">
+		<%= image_tag "header.png" %>
+	</div>
+<%= render 'layouts/menu'%>	
+	<div id="container">
+		<%= yield %>
+	</div>
+	<div id="footer">
+		<%=image_tag "footer.jpg"%>
+	</div>
+</body>
+</html>

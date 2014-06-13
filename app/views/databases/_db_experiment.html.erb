@@ -1,0 +1,25 @@
+<h3>Manage Databases</h3>
+<div>
+	<%= field_set_tag "Create New Database" do %>
+		<% @database = Database.new%>
+		<% @database.mission = "IXV-Experiments"%>
+		<%= render 'databases/form'%>
+	<%end%>
+	<br />
+	<label for="db_gen">Database</label>
+	<%= select_tag "db_gen_exp" ,options_from_collection_for_select(Database.where(mission:"IXV-Experiments").sort_by{|db| db.version}, "id", "version"), :class=>'select_db form-control',include_blank: true%>
+	<div class="container-fluid task">
+	<%= field_set_tag "Upload database files" do %>
+	<input id="db_exp_upload" type="file" name="files[]" data-url="databases/:id/upload" multiple />
+	<div id="db_exp_status">
+	</div>
+	<%end%>
+	<br />
+	<label for="exp_dbfiles">Database files:</label>
+		<input list="exp_dbfiles" />
+		<datalist id="exp_dbfiles"></datalist>
+	</div>
+	<div class="container-fluid task">
+	<%= render  :partial => 'tasks/start', :locals => { :task => Task.build("signgen-exp") }  %>
+	</div>
+</div>

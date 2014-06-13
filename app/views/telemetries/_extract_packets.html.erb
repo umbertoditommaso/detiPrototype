@@ -1,0 +1,10 @@
+<h3> Packet Extract </h3>
+	<div>		
+		<%= render partial:'databases/select', locals:{form_id:"db_extract"}%>
+		<%= render partial:'telemetries/select', locals:{form_id:"select_telemetry"}%>
+		<div class="container-fluid task">
+		<%= render partial:'tasks/start', locals:{ :task => Task.build("packetfinder") }  %>
+		</div><div class="container-fluid task">
+		<%= render  :partial => 'tasks/start',locals:{ :task => Task.build("paramfinder") }  %>
+		</div>
+	</div>

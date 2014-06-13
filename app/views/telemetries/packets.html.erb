@@ -1,0 +1,7 @@
+<div id="select_packet" class="accordion">
+	<% @packets.each do |vc|%>
+	<h4><%=packet.spid%></h4>
+	<div></div>
+	<% end %>
+</div>
+<%= render  :partial => 'tasks/start', :locals => { :task => @extract }  %>

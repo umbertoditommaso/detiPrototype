@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<function>
+	<name>Generate Syntethic</name>
+	<description>
+		Extract Syntethic paramameters from the selected telemetries
+	</description>
+	<setting>db</setting>
+	<setting>good</setting>
+	<before>
+		<eval>@task.settings["version"] = Database.find(@task.settings["db"]).version</eval>
+		<eval>@task.settings["name"]=Telemetry.find(@task.settings["good"]).name</eval>
+	</before>	
+  	<workingDir>/telemetries/IXV/$(version)/$(name)_$(version)/</worikingDir>
+	<in>
+		<inputs>
+			<dir>/../</dir>
+			<dir>/./</dir>
+		</inputs>
+		<label>Function parameters</label>
+	</in>
+	<after>
+	</after>
+	<output>
+		<files>/Synthetic/*.csv</files>
+		<files>/C++_IXVGenSynth.txt</files>
+	</output>
+	<executable>
+		<dir>proc/bin/</dir>
+		<name>C++_IXVGenSynt_$(version).exe</name></executable>
+</function>

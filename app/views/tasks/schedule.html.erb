@@ -1,0 +1,26 @@
+<h1>Listing tasks</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Exec</th>
+    <th>Arguments</th>
+    <th>Path</th>
+    <th>Finalized</th>
+  </tr>
+
+<% @tasks.each do |task| %>
+  <tr>
+    <td><%= task.name_id %></td>
+    <td><%= task.exec %></td>
+    <td><%= task.arguments %></td>
+    <td><%= task.path %></td>
+    <td><%= task.finalized %></td>
+    <td><%= link_to 'Show', task ,:class=>"btn btn-info"%></td>
+    <td><%= link_to 'Force Finalize', finalize_task_path(task), method: :finalize, data: { confirm: 'Are you sure?' },:class=>"btn btn-danger" %></td>
+    <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' },:class=>"btn btn-danger"  %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= button_tag "Start Schedule", :class=>"btn btn-primary",:id=>"start_schedule"%>

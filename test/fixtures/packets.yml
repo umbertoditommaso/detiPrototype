@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  spid: MyString
+  telemetry: MyString
+  channel: 1
+
+two:
+  spid: MyString
+  telemetry: MyString
+  channel: 1
