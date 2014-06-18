@@ -10,10 +10,33 @@ input.val(selected);
 )
 
 
-#checkStatus = (data,queque,timer) -> alert "success" if !data.running
 
-#finalize= (id,queque) -> $.post("#{id}/finalize.json",startTask(queque.pop(),queque) if queque.length >0)
+#########################################################################################
+task_start = (task) -> ( $.post "tasks/#{task.id}/start.json",
+(data) -> ($("span.ui-dialog-title").html("#{task.exec} #{data.pid}");
+progressbar = $("#task_progress").progressbar({value: false});
+id_interval = setInterval((() -> update_status(task,id_interval)), 5000));)
+###################################################################################
+update_status = (task,interval) -> ($.getJSON("/tasks/#{task.id}/status",(data) -> ($("#task_status").html((data.output.replace(/\n/g, "<br />")));
+running = data.running;
+if (!running) then (clearInterval(interval);
+$("#task_progress").progressbar( "destroy" );
+$.post("/tasks/#{task.id}/finalize.js",(data) ->(eval(data);));
+alert ("task completeted");
+return true;))))
+#######################################################################à
 
-#startTask = (task,queque)->  $.post "#{task.id}/start.json",{},(data) -> timer = setInterval -> $.getJSON "#{task.id}/status",(data) -> checkStatus(data,queque,timer) ,5000
+task_scheduled = (task) -> ($("span.ui-dialog-title").html("#{task.exec}");
+$("#task_status").html("task scheduled");)
 
-#$(document).ready -> $("#start_schedule").click -> ( $.getJSON("schedule",(data) -> startTask(data.pop(),data) if data.length > 0))
+#########################################################################
+new_tasks_dialog = (task) -> ($("#task_status").html("");
+task_dialog= $("#task_dialog").dialog({height:200,
+maxHeight:800,
+modal:true});
+if (task.finalized != null) then task_start(task) else task_scheduled(task))
+
+############################################################################################
+$(document).ready -> $(".init_task").on("ajax:success",(e, data, status, xhr) ->
+   	new_tasks_dialog(data)).on("ajax:error",(e, xhr, status, error) -> alert "error")
+#########################################################################

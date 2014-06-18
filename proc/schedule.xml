@@ -188,4 +188,79 @@
   </settings>
   <updated-at type="datetime">2014-06-12T11:02:18Z</updated-at>
 </task>
+<task>
+  <arguments> 000 0 1 11 0 001 0000 00000000</arguments>
+  <created-at type="datetime">2014-06-17T10:33:09Z</created-at>
+  <exec>C++_IXVSignGen.exe</exec>
+  <finalized type="boolean">false</finalized>
+  <id type="integer">26</id>
+  <name-id>signgen</name-id>
+  <path>C:/Sites/detiPrototype/telemetries/IXV/5.2/</path>
+  <pid type="integer" nil="true"/>
+  <settings>
+    <db>2</db>
+    <version>5.2</version>
+  </settings>
+  <updated-at type="datetime">2014-06-17T10:33:09Z</updated-at>
+</task>
+<task>
+  <arguments> 000 0 1 11 0 001 0000 00000000</arguments>
+  <created-at type="datetime">2014-06-17T10:37:34Z</created-at>
+  <exec>C++_IXVSignGen.exe</exec>
+  <finalized type="boolean">false</finalized>
+  <id type="integer">28</id>
+  <name-id>signgen</name-id>
+  <path>C:/Sites/detiPrototype/telemetries/IXV/5.2/</path>
+  <pid type="integer" nil="true"/>
+  <settings>
+    <db>2</db>
+    <version>5.2</version>
+  </settings>
+  <updated-at type="datetime">2014-06-17T10:37:34Z</updated-at>
+</task>
+<task>
+  <arguments> 000 0 1 11 0 001 0000 00000000</arguments>
+  <created-at type="datetime">2014-06-17T10:39:42Z</created-at>
+  <exec>C++_IXVSignGen.exe</exec>
+  <finalized type="boolean">false</finalized>
+  <id type="integer">29</id>
+  <name-id>signgen</name-id>
+  <path>C:/Sites/detiPrototype/telemetries/IXV/5.2/</path>
+  <pid type="integer" nil="true"/>
+  <settings>
+    <db>2</db>
+    <version>5.2</version>
+  </settings>
+  <updated-at type="datetime">2014-06-17T10:39:42Z</updated-at>
+</task>
+<task>
+  <arguments> 000 0 1 11 0 001 0000 00000000</arguments>
+  <created-at type="datetime">2014-06-17T11:04:05Z</created-at>
+  <exec>C++_IXVSignGen.exe</exec>
+  <finalized type="boolean">false</finalized>
+  <id type="integer">38</id>
+  <name-id>signgen</name-id>
+  <path>C:/Sites/detiPrototype/telemetries/IXV/5.2/</path>
+  <pid type="integer" nil="true"/>
+  <settings>
+    <db>2</db>
+    <version>5.2</version>
+  </settings>
+  <updated-at type="datetime">2014-06-17T11:04:05Z</updated-at>
+</task>
+<task>
+  <arguments> 000 0 1 11 0 001 0000 00000000</arguments>
+  <created-at type="datetime">2014-06-17T11:04:53Z</created-at>
+  <exec>C++_IXVSignGen.exe</exec>
+  <finalized type="boolean">false</finalized>
+  <id type="integer">39</id>
+  <name-id>signgen</name-id>
+  <path>C:/Sites/detiPrototype/telemetries/IXV/5.2/</path>
+  <pid type="integer" nil="true"/>
+  <settings>
+    <db>2</db>
+    <version>5.2</version>
+  </settings>
+  <updated-at type="datetime">2014-06-17T11:04:53Z</updated-at>
+</task>
 </tasks>

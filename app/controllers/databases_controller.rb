@@ -81,6 +81,7 @@ class DatabasesController < ApplicationController
     @database = Database.new(params[:database])
     path = @database.path
     @database.active=false
+    Dir.mkdir "telemetries" unless Dir.exists? "telemetries"
     Dir.mkdir "telemetries/#{@database.mission}" unless Dir.exists? "telemetries/#{@database.mission}"
     if !Dir.exists? path then
       Dir.mkdir path

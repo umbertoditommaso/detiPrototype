@@ -1,7 +1,7 @@
 require 'nokogiri'
 
 class Task < ActiveRecord::Base
-  attr_accessible :name_id,:exec,:arguments,:path,:settings
+  attr_accessible :name_id,:exec,:arguments,:path,:settings,:pid
   serialize :settings
   class_attribute :inputs,:description,:label
   validate :name_id,presence:true,format:{with:/[^\/\\"']+/}

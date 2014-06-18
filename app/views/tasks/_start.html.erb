@@ -1,4 +1,4 @@
-<%= form_for(task ,:url => '/tasks/init',remote: true, :html => { :id => "new_task_#{task.name_id}" }) do |f| %>
+<%= form_for(task ,:url => '/tasks/init',remote: true, :html => {:class=>"init_task", :'data-type' => 'json',:id => "new_task_#{task.name_id}" }) do |f| %>
 <% name_id =task.name_id %>
   <%= field_set_tag task.label do %>
   <%= task.description %><br />

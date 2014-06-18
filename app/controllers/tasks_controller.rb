@@ -5,17 +5,18 @@ class TasksController < ApplicationController
   def start
     @task = Task.find(params[:id])
     root = Dir.pwd
-    File.open("#{@task.path}/#{@task.exec}.xml","w"){|f| f.write @task.settings.to_xml(:root=>"settings")}
+    #File.open("#{@task.path}/#{@task.exec}.xml","w"){|f| f.write @task.settings.to_xml(:root=>"settings")}
     #Dir.chdir(@task.path)
     puts "[TASK_CONTOLLER]executing task:#{@task.getCmd(root)} \n"
     puts "[TASK_CONTROLLER]Working Directory:#{@task.path} \n"
     #the task is started throught a ruby script launcher so it can switch to the required working path
     #without changing the rails app settings
     @cmd ="ruby proc/launch.rb #{@task.path} \"#{@task.getCmd(root)}\""
-    #puts @cmd
+    puts "[TASK_CONTOLLER]launcher :\n#{@cmd}\n"
     @pid = Process.spawn(@cmd) unless @scheduled
     puts "[TASK_CONTROLLER]Task launched,pid:#{@pid} \n"
     @task.update_attribute(:finalized,false)
+    @task.update_attribute(:pid,@pid)
     @task.acquire_locks
     respond_to do |format|
       format.html {redirect_to tasks_url}
@@ -166,45 +167,22 @@ class TasksController < ApplicationController
         @script = "tasks/added_schedule"
         @task.update_attribute(:finalized,nil)
       else  
-        Lock.transaction do
-          #open the task manifest
-          f = File.open(@task.getManifest)
-          #parse using Nokigiri gem
-          doc = Nokogiri::XML(f)
-          if check_proc_is_running @task.exec then
-            raise ActiveRecord::Rollback, "This program is already been locked"
-          end
-          lock = Lock.acquire(@task.exec,'x')
-          raise ActiveRecord::Rollback, "Resourse locked by another task" unless lock
-          @task.locks << lock
-        #  
-          doc.xpath("//inputs//files").each do |entry|
-            lock = Lock.acquire( @task.path+entry.content,'r')
-            raise ActiveRecord::Rollback, "Resourse locked by another task" unless lock
-            @task.locks << lock
-          end
-          doc.xpath("//output//files").each do |entry| 
-            lock = Lock.acquire(@task.path+entry.content,'w')
-            raise ActiveRecord::Rollback, "Resourse locked by another task" unless lock
-            @task.locks << lock
-          end
-          f.close
-          @task.save!
-        end
+# => @task.acquire_locks
         @script = "tasks/init"
       end
       respond_to do |format|
-          root = Dir.pwd
-          File.open("#{@task.path}/#{@task.exec}.xml","w"){|f| f.write @task.settings.to_xml(:root=>"settings")}
+          #root = Dir.pwd
+          #File.open("#{@task.path}/#{@task.exec}.xml","w"){|f| f.write @task.settings.to_xml(:root=>"settings")}
           #Dir.chdir(@task.path)
-          puts @task.getCmd(root)
-          puts @task.path
+          #puts @task.getCmd(root)
+          #puts @task.path
           #the task is started throught a ruby script launcher so it can switch to the required working path
           #without changing the rails app settings
-          @cmd ="ruby proc/launch.rb #{@task.path} \"#{@task.getCmd(root)}\""
-          puts @cmd
-          @pid = Process.spawn(@cmd) unless @scheduled
-          puts @pid
+          #@cmd ="ruby proc/launch.rb #{@task.path} \"#{@task.getCmd(root)}\""
+          #puts @cmd
+          #@pid = Process.spawn(@cmd) unless @scheduled
+          #puts @pid
+          #@task.pid = @pid
           #Process.spawn(@cmd)
           puts "[TASK_CONTROLLER]Rendering:#{@script}"
           format.html { redirect_to status_task_url,@task, notice: 'Task was successfully created.'}
@@ -227,11 +205,14 @@ class TasksController < ApplicationController
     @output =""
     
     #open the stdout file
-    file = File.new("#{@task.getStdout}","r")
-    while (line = file.gets)
-      @output += line +"\n"#append the line to the output var
+    if File.exists? @task.getStdout 
+      file = File.new("#{@task.getStdout}","r")
+      while (line = file.gets)
+        @output += line +"\n"#append the line to the output var
+      end
+      file.close
     end
-    file.close
+    
     @status ={task:@task,output:@output,running:@running}#create an hash with the require objects
     respond_to do |format|
       format.html
