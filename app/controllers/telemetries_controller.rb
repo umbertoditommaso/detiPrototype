@@ -1,5 +1,5 @@
 class TelemetriesController < ApplicationController
-
+before_filter :signed_in_and_redirect
   def import
     @db=Database.find(params[:database_id])
     @files = params[:files]

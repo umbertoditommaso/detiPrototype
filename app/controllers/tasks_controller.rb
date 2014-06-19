@@ -1,7 +1,7 @@
 require 'nokogiri'
 class TasksController < ApplicationController
 
-
+before_filter :signed_in_and_redirect
   def start
     @task = Task.find(params[:id])
     root = Dir.pwd

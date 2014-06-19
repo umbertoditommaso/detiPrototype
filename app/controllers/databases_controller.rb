@@ -1,6 +1,6 @@
 class DatabasesController < ApplicationController
     
-
+ before_filter :signed_in_and_redirect
   def activate
     @db = Database.find(params[:id])
     @db = @db.activate
