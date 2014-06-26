@@ -48,7 +48,6 @@ $(document).ready -> $("#deleteUploadedButton").click -> ($("#deleteUpload").fin
 #################################################
 $(document).ready ->( good_files_uploader();
 $("#db_for_import").change -> ($("#deleteUpload").attr("action","databases/#{$('#db_for_import').val()}/telemetries/delete");
-setDataList("#db_for_import","#imported","telemetries/uploaded","version");
 $("#good_upload").fileupload('option','url',"/databases/#{$("#db_for_import").val()}/telemetries/upload");
 setDataList("#db_for_import","#processed","telemetries/processed","time");
 setDbToSelectedValue("#db_for_import");))
